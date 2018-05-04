@@ -4,12 +4,6 @@ import org.lwjgl.opengl.Display;
 
 import renderEngine.DisplayManager;
 
-/**
- * This class contains the main method and is used to test the engine.
- * 
- * @author Karl
- *
- */
 public class MainGameLoop {
 
 	/**
