@@ -7,12 +7,7 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.PixelFormat;
 
-/**
- * This class contains all the methods needed to set-up, maintain, and close a LWJGL display.
- * 
- * @author Karl
- *
- */
+
 public class DisplayManager {
 
 	private static final int WIDTH = 1280;
