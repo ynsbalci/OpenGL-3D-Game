@@ -7,7 +7,7 @@ import org.lwjgl.opengl.GL30;
 /**
  * Handles the rendering of a model to the screen.
  * 
- * @author Karl
+ * @author ynsbalci
  *
  */
 public class Renderer {

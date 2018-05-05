@@ -4,7 +4,7 @@ package renderEngine;
  * Represents a loaded model. It contains the ID of the VAO that contains the
  * model's data, and holds the number of vertices in the model.
  * 
- * @author Karl
+ * @author ynsbalci
  *
  */
 public class RawModel {
