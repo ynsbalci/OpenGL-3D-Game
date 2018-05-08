@@ -35,28 +35,7 @@ public class Renderer {
         GL11.glClearColor(0.89f, 0.89f, 0.89f, 1);
     }
     
-    //obsolete
-    public void render(RawModel model){
-        GL30.glBindVertexArray(model.getVaoID());
-        GL20.glEnableVertexAttribArray(0);
-        GL11.glDrawElements(GL11.GL_TRIANGLES, model.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
-        GL20.glDisableVertexAttribArray(0);
-        GL30.glBindVertexArray(0);
-    }
-    
-    //obsolete
-    public void render(TexturedModel texturedModel){
-    	RawModel model = texturedModel.getRawModel();
-        GL30.glBindVertexArray(model.getVaoID());
-        GL20.glEnableVertexAttribArray(0);
-        GL20.glEnableVertexAttribArray(1);
-        GL13.glActiveTexture(GL13.GL_TEXTURE0);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, texturedModel.getTexture().getID());
-        GL11.glDrawElements(GL11.GL_TRIANGLES, model.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
-        GL20.glDisableVertexAttribArray(0);
-        GL20.glDisableVertexAttribArray(1);
-        GL30.glBindVertexArray(0);
-    }
+
     
     public void render(Entity entity, StaticShader shader){
     	TexturedModel model = entity.getModel();
@@ -65,6 +44,7 @@ public class Renderer {
         GL30.glBindVertexArray(rawModel.getVaoID());
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
+        GL20.glEnableVertexAttribArray(2);
         
         Matrix4f transformationMatrix = Maths.createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale());
         
@@ -75,6 +55,7 @@ public class Renderer {
         GL11.glDrawElements(GL11.GL_TRIANGLES, rawModel.getVertexCount(), GL11.GL_UNSIGNED_INT, 0);
         GL20.glDisableVertexAttribArray(0);
         GL20.glDisableVertexAttribArray(1);
+        GL20.glDisableVertexAttribArray(2);
         GL30.glBindVertexArray(0);
     }
     
