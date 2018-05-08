@@ -1,10 +1,7 @@
 package engineTester;
  
 import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
-import org.newdawn.slick.opengl.TextureLoader;
-import org.omg.CORBA.OBJ_ADAPTER;
 
 import entities.Camera;
 import entities.Entity;
@@ -29,8 +26,12 @@ public class MainGameLoop {
         
 		RawModel model = OBJLoader.loadObjModel("dragon", loader);
 		
-		ModelTexture texture = new ModelTexture(loader.loadTexture("DragonTexture"));
-        TexturedModel staticModel = new TexturedModel(model, texture);
+        TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("DragonTexture")));
+        
+        ModelTexture texture = staticModel.getTexture();
+        texture.setShineDamper(10);
+        texture.setReflectivty(1);
+        
         
         Vector3f position = new Vector3f(0, 0, -25);
         Vector3f rotation = new Vector3f(0, 0, 0);
@@ -44,7 +45,7 @@ public class MainGameLoop {
         while(!Display.isCloseRequested()){
             //game logic
         	//entity.increasePosition(new Vector3f(0f, 0f, -0.1f));
-        	//entity.increaseRotation(new Vector3f(0f, 0f, 0f));
+        	entity.increaseRotation(new Vector3f(0f, 1f, 0f));
         	//entity.increaseScale(new Vector3f(0f, 0f, 0f));
         	camera.move();
             renderer.prepare();

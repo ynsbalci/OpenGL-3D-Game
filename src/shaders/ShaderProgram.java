@@ -3,7 +3,6 @@ package shaders;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
