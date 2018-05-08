@@ -4,6 +4,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
 import org.newdawn.slick.opengl.TextureLoader;
+import org.omg.CORBA.OBJ_ADAPTER;
 
 import entities.Camera;
 import entities.Entity;
@@ -11,6 +12,7 @@ import models.RawModel;
 import models.TexturedModel;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
+import renderEngine.OBJLoader;
 import renderEngine.Renderer;
 import shaders.StaticShader;
 import textures.ModelTexture;
@@ -25,7 +27,7 @@ public class MainGameLoop {
         StaticShader shader = new StaticShader();
         Renderer renderer = new Renderer(shader);
          
-        float[] vertices = {			
+       /* float[] vertices = {			
 				-0.5f,0.5f,0,	
 				-0.5f,-0.5f,0,	
 				0.5f,-0.5f,0,	
@@ -56,9 +58,9 @@ public class MainGameLoop {
 				0.5f,-0.5f,0,
 				0.5f,-0.5f,1
 				
-		};
+		};*/
 		
-		float[] textureCoords = {
+		/*float[] textureCoords = {
 				
 				0,0,
 				0,1,
@@ -83,12 +85,10 @@ public class MainGameLoop {
 				0,0,
 				0,1,
 				1,1,
-				1,0
-
-				
-		};
+				1,0	
+		};*/
 		
-		int[] indices = {
+		/*int[] indices = {
 				0,1,3,	
 				3,1,2,	
 				4,5,7,
@@ -101,14 +101,17 @@ public class MainGameLoop {
 				19,17,18,
 				20,21,23,
 				23,21,22
-
-		};
-         
-        RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
-        ModelTexture texture = new ModelTexture(loader.loadTexture("image"));
+		};*/
+        //RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
+        
+        
+		RawModel model = OBJLoader.loadObjModel("Suzanne", loader);
+		
+        //ModelTexture texture = new ModelTexture(loader.loadTexture("image"));
+		ModelTexture texture = new ModelTexture(loader.loadTexture("SuzanneTexture"));
         TexturedModel staticModel = new TexturedModel(model, texture);
         
-        Vector3f position = new Vector3f(0, 0, -1);
+        Vector3f position = new Vector3f(0, 0, -5);
         Vector3f rotation = new Vector3f(0, 0, 0);
         Vector3f scale = new Vector3f(1, 1, 1);
         
@@ -119,7 +122,7 @@ public class MainGameLoop {
         while(!Display.isCloseRequested()){
             //game logic
         	//entity.increasePosition(new Vector3f(0f, 0f, -0.1f));
-        	//entity.increaseRotation(new Vector3f(0.01f, 0.01f, 0f));
+        	entity.increaseRotation(new Vector3f(0f, 0f, 0f));
         	//entity.increaseScale(new Vector3f(0f, 0f, 0f));
         	camera.move();
             renderer.prepare();
