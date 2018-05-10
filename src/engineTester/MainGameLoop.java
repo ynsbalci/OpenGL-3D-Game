@@ -16,6 +16,7 @@ import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.MasterRenderer;
 import renderEngine.OBJLoader;
+import terrains.Terrain;
 import textures.ModelTexture;
  
 public class MainGameLoop {
@@ -26,23 +27,16 @@ public class MainGameLoop {
         Loader loader = new Loader();
         
         
-		RawModel model = OBJLoader.loadObjModel("dragon", loader);
-        TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("drogonTexture")));
-        
+		RawModel model = OBJLoader.loadObjModel("tree", loader);
+		
+        TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("treeTexture")));
         ModelTexture texture = staticModel.getTexture();
-        texture.setShineDamper(10);
-        texture.setReflectivty(1);
         
-        List<Entity> allEntities = new ArrayList<>();
-        Random rand = new Random();
+        Entity entity = new Entity(staticModel, new Vector3f(0f, 0f, -25f),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f));
         
-        for (int i = 0; i < 25; i++) {
-			Vector3f p = new Vector3f(rand.nextFloat() * 20 - 10, rand.nextFloat() * 20 - 10,rand.nextFloat() * -50);
-			Vector3f r = new Vector3f(rand.nextFloat() * 180, rand.nextFloat() * 180, rand.nextFloat() * 180);
-			Vector3f s = new Vector3f(rand.nextFloat(), rand.nextFloat(), rand.nextFloat());
-			allEntities.add(new Entity(staticModel, p, r, s));
-			
-		} 
+        Terrain terrain1 = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("grass")));
+        Terrain terrain2 = new Terrain(1, 0, loader, new ModelTexture(loader.loadTexture("grass")));
+        
         
         Light light = new Light(new Vector3f(0, 0, -20), new Vector3f(1, 1, 0));
         
@@ -53,11 +47,10 @@ public class MainGameLoop {
         while(!Display.isCloseRequested()){
         	camera.move();
 
-            for(Entity e : allEntities) {
-            	
-            	e.increaseRotation(new Vector3f(0f, 1f, 0f));
-            	renderer.processEntity(e);
-            }
+        	renderer.processTerrain(terrain1);
+        	renderer.processTerrain(terrain2);
+        	
+        	renderer.processEntity(entity);
             renderer.render(light, camera);
             DisplayManager.updateDisplay();         
         }

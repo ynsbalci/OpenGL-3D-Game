@@ -10,6 +10,7 @@ public class Entity {
 	private Vector3f position;
 	private Vector3f rotation;
 	private Vector3f scale;
+	
 	public Entity(TexturedModel model, Vector3f position, Vector3f rotation, Vector3f scale) {
 		this.model = model;
 		this.position = position;
