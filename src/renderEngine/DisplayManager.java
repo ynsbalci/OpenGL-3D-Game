@@ -21,7 +21,7 @@ public class DisplayManager {
         try {
             Display.setDisplayMode(new DisplayMode(WIDTH,HEIGHT));
             Display.create(new PixelFormat(), attribs);
-            Display.setTitle("Our First Display!");
+            Display.setTitle("Open GL 3D Game");
         } catch (LWJGLException e) {
             e.printStackTrace();
         }

@@ -20,27 +20,27 @@ public class Camera {
 		//
 		if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
 			//
-			this.position.y += 0.05f;
+			this.position.y += 0.1f;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
 			//
-			this.position.y -= 0.05f;
+			this.position.y -= 0.1f;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
 			//
-			this.position.x -= 0.05f;
+			this.position.x -= 0.1f;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
 			//
-			this.position.x += 0.05f;
+			this.position.x += 0.1f;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
 			//
-			this.position.z -= 0.05f;
+			this.position.z -= 0.1f;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
 			//
-			this.position.z += 0.05f;
+			this.position.z += 0.1f;
 		}
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_O)) {
