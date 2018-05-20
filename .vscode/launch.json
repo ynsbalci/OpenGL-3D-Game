@@ -1,0 +1,59 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch)-MainGameLoop<OpenGL 3D Game>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "engineTester.MainGameLoop",
+            "projectName": "OpenGL 3D Game",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-XPMFile<OpenGL 3D Game>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "org.lwjgl.util.XPMFile",
+            "projectName": "OpenGL 3D Game",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-CacheLineSize<OpenGL 3D Game>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "org.lwjgl.util.mapped.CacheLineSize",
+            "projectName": "OpenGL 3D Game",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-TestUtils<OpenGL 3D Game>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "stopOnEntry": false,
+            "mainClass": "org.newdawn.slick.tests.TestUtils",
+            "projectName": "OpenGL 3D Game",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Debug (Attach)",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 0
+        }
+    ]
+}

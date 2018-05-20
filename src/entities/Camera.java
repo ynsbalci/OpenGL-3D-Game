@@ -5,39 +5,69 @@ import org.lwjgl.util.vector.Vector3f;
 
 public class Camera {
 	
-	private Vector3f position = new Vector3f(0f, 0f, 0f);
+	private Vector3f position;
 	private float pitch;
 	private float yaw;
 	private float roll;
 	
-	public Camera() {}
+	public Camera(Vector3f position, Vector3f rotation) {
+		this.position = position;
+		
+				
+	}
 	
 	public void move() {
 		//
 		if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
 			//
-			this.position.y += 0.5f;
+			this.position.y += 0.05f;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
 			//
-			this.position.y -= 0.5f;
+			this.position.y -= 0.05f;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
 			//
-			this.position.x -= 0.5f;
+			this.position.x -= 0.05f;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
 			//
-			this.position.x += 0.5f;
+			this.position.x += 0.05f;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_Q)) {
 			//
-			this.position.z -= 0.5f;
+			this.position.z -= 0.05f;
 		}
 		if (Keyboard.isKeyDown(Keyboard.KEY_E)) {
 			//
-			this.position.z += 0.5f;
+			this.position.z += 0.05f;
 		}
+		
+		if (Keyboard.isKeyDown(Keyboard.KEY_O)) {
+			//
+			this.yaw -= 0.1f;
+		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_P)) {
+			//
+			this.yaw += 0.1f;
+		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_J)) {
+			//
+			this.pitch += 0.1f;
+		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_K)) {
+			//
+			this.pitch -= 0.1f;
+		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_N)) {
+			//
+			this.roll += 0.1f;
+		}
+		if (Keyboard.isKeyDown(Keyboard.KEY_M)) {
+			//
+			this.roll -= 0.1f;
+		}
+		
 	}
 
 	public Vector3f getPosition() {
