@@ -36,7 +36,6 @@ public class MainGameLoop {
         TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture, gTexture, bTexture);
         TerrainTexture blendMap = new TerrainTexture(loader.loadTexture("blendMap"));
         
-        
 
         TexturedModel lowPolyTree = new TexturedModel(OBJLoader.loadObjModel("lowPolyTree", loader), new ModelTexture(loader.loadTexture("lowPolyTree")));
         TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader), new ModelTexture(loader.loadTexture("grassTexture")));
@@ -46,18 +45,20 @@ public class MainGameLoop {
         grass.getTexture().setUseFakeLighting(true);
         fern.getTexture().setUseFakeLighting(true);
         
+        Terrain terrain = new Terrain(0, -1 , loader, texturePack, blendMap, "heightmap");
+        
+        
         List<Entity> entities = new ArrayList<Entity>();
         Random rand = new Random();
         for (int i = 0; i < 500; i++) {
-			entities.add(new Entity(lowPolyTree, new Vector3f(rand.nextFloat() * 800f - 400, 0f, rand.nextFloat() * 800f - 400f),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
-        	entities.add(new Entity(grass, new Vector3f(rand.nextFloat() * 800f - 400, 0f, rand.nextFloat() * 800f - 400f),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
-        	entities.add(new Entity(fern, new Vector3f(rand.nextFloat() * 800f - 400, 0f, rand.nextFloat() * 800f - 400f),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
+        	float x = rand.nextFloat() * 800f - 400;
+        	float z = rand.nextFloat() * 800f - 400;
+        	float y = terrain.getHeightOfTerrain(x, z);
+			entities.add(new Entity(lowPolyTree, new Vector3f(x, y, z),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
+        	//entities.add(new Entity(grass, new Vector3f(rand.nextFloat() * 800f - 400, 0f, rand.nextFloat() * 800f - 400f),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
+        	//entities.add(new Entity(fern, new Vector3f(rand.nextFloat() * 800f - 400, 0f, rand.nextFloat() * 800f - 400f),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
 		}
         
-        Terrain terrain1 = new Terrain(0, -1 , loader, texturePack, blendMap, "heightmap");
-        Terrain terrain2 = new Terrain(-1, -1 , loader, texturePack, blendMap, "heightmap");
-        Terrain terrain3 = new Terrain(0, 0, loader, texturePack, blendMap, "heightmap");
-        Terrain terrain4 = new Terrain(-1, 0, loader, texturePack, blendMap, "heightmap");
         
         
         Light light = new Light(new Vector3f(20000f, 20000f, 20000f), new Vector3f(1, 1, 0));
@@ -68,19 +69,20 @@ public class MainGameLoop {
         
         TexturedModel stanfordBunny =  new TexturedModel(OBJLoader.loadObjModel("stanfordBunny", loader), new ModelTexture(loader.loadTexture("white")));
         
-        Player player = new Player(stanfordBunny, new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
+        Player player = new Player(stanfordBunny, new Vector3f(100, 0, 0), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
         
         Camera camera = new Camera(player);
         
+        
         while(!Display.isCloseRequested()){
+        	
+        	
         	camera.move();
-        	player.move();
+        	player.move(terrain);
         	renderer.processEntity(player);
         	
-        	renderer.processTerrain(terrain1);
-        	renderer.processTerrain(terrain2);
-        	renderer.processTerrain(terrain3);
-        	renderer.processTerrain(terrain4);
+        	renderer.processTerrain(terrain);
+
         	
         	for (Entity entity : entities) {
         		renderer.processEntity(entity);
