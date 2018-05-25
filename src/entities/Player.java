@@ -26,13 +26,13 @@ public class Player extends Entity{
 		super(model, position, rotation, scale);
 	}
 	
-	public void move( Terrain terrain) {
+	public void move(Terrain terrain) {
 		checkInputs();
 
 		super.increaseRotation(new Vector3f(0f, currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0f));
 		float distance = currentSpeed * DisplayManager.getFrameTimeSeconds();
-		float dx = (float) (distance * Math.sin(Math.toRadians(super.getPosition().y)));
-		float dz = (float) (distance * Math.cos(Math.toRadians(super.getPosition().y)));
+		float dx = (float) (distance * Math.sin(Math.toRadians(super.getRotation().y)));
+		float dz = (float) (distance * Math.cos(Math.toRadians(super.getRotation().y)));
 		super.increasePosition(new Vector3f(dx, 0f, dz));
 		
 		upwardsSpeed += GRAVITY * DisplayManager.getFrameTimeSeconds();
@@ -67,10 +67,10 @@ public class Player extends Entity{
 		}
 		
 		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			this.currentTurnSpeed = -TURN_SPPED;
+			this.currentTurnSpeed = TURN_SPPED;
 		}
 		else if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-			this.currentTurnSpeed = TURN_SPPED;
+			this.currentTurnSpeed = -TURN_SPPED;
 		}else {
 			this.currentTurnSpeed = 0;
 		}
