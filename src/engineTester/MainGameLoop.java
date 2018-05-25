@@ -54,10 +54,10 @@ public class MainGameLoop {
         	entities.add(new Entity(fern, new Vector3f(rand.nextFloat() * 800f - 400, 0f, rand.nextFloat() * 800f - 400f),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
 		}
         
-        Terrain terrain1 = new Terrain(0, -1 , loader, texturePack, blendMap);
-        Terrain terrain2 = new Terrain(-1, -1 , loader, texturePack, blendMap);
-        Terrain terrain3 = new Terrain(0, 0, loader, texturePack, blendMap);
-        Terrain terrain4 = new Terrain(-1, 0, loader, texturePack, blendMap);
+        Terrain terrain1 = new Terrain(0, -1 , loader, texturePack, blendMap, "heightmap");
+        Terrain terrain2 = new Terrain(-1, -1 , loader, texturePack, blendMap, "heightmap");
+        Terrain terrain3 = new Terrain(0, 0, loader, texturePack, blendMap, "heightmap");
+        Terrain terrain4 = new Terrain(-1, 0, loader, texturePack, blendMap, "heightmap");
         
         
         Light light = new Light(new Vector3f(20000f, 20000f, 20000f), new Vector3f(1, 1, 0));
