@@ -56,6 +56,8 @@ public class MainGameLoop {
         
         Terrain terrain1 = new Terrain(0, -1 , loader, texturePack, blendMap);
         Terrain terrain2 = new Terrain(-1, -1 , loader, texturePack, blendMap);
+        Terrain terrain3 = new Terrain(0, 0, loader, texturePack, blendMap);
+        Terrain terrain4 = new Terrain(-1, 0, loader, texturePack, blendMap);
         
         
         Light light = new Light(new Vector3f(20000f, 20000f, 20000f), new Vector3f(1, 1, 0));
@@ -77,6 +79,9 @@ public class MainGameLoop {
         	
         	renderer.processTerrain(terrain1);
         	renderer.processTerrain(terrain2);
+        	renderer.processTerrain(terrain3);
+        	renderer.processTerrain(terrain4);
+        	
         	for (Entity entity : entities) {
         		renderer.processEntity(entity);
 			}
