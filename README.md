@@ -24,4 +24,43 @@ TO DO LIST
 - [x] 3rd Person Camera
 - [x] Mipmapping
 - [x] Terrain Height Maps
+- [x] Terrain Collision Detection 
+- [ ] Texture Atlases 
+- [ ] Rendering GUIs 
+- [ ] Multiple Lights
+- [ ] Point Lights
+- [ ] Skybox
+- [ ] Day/Night
+- [ ] Mouse Picking
+- [ ] Cel Shading
+- [ ] Normal Mapping
+- [ ] Font Rendering
+- [ ] Distance Field Text Rendering
+- [ ] Particle Effects
+- [ ] Animating Particle Textures
+- [ ] Instanced Rendering
+- [ ] Procedural Terrain
+- [ ] Shadow Mapping (1/2)
+- [ ]  Shadow Mapping (2/2)
+- [ ] Percentage Closer Filtering
+- [ ] Antialiasing and Anisotropic Filtering
+- [ ] Exporting a LWJGL Game
+- [ ] Post-Processing Effects
+- [ ] Gaussian Blur
+- [ ] Multisampled FBOs
+- [ ] Specular Maps
+- [ ] Bloom Effect
+- [ ] Multiple Render Targets
+- [ ] Geometry Shader Introduction
+- [ ] Geometry Shader Examples
+- [ ] Cube Map Reflections
+- [ ] Render to Cube Map Texture
+- [ ] Lens Flare
+- [ ] Occlusion Queries
+- [ ] Low-Poly Terrain
+- [ ] Low-Poly Water
+- [ ] Skeletal Animation Tutorial #1
+- [ ] Skeletal Animation Tutorial #2
+- [ ] Skeletal Animation Tutorial #3
+- [ ] Skeletal Animation Tutorial #4
 
