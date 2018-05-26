@@ -11,12 +11,34 @@ public class Entity {
 	private Vector3f rotation;
 	private Vector3f scale;
 	
+	private int textureIndex = 0;
+	
 	public Entity(TexturedModel model, Vector3f position, Vector3f rotation, Vector3f scale) {
 		this.model = model;
 		this.position = position;
 		this.rotation = rotation;
 		this.scale = scale;
 	}
+	
+	public Entity(TexturedModel model, int index, Vector3f position, Vector3f rotation, Vector3f scale) {
+		this.model = model;
+		this.textureIndex = index;
+		this.position = position;
+		this.rotation = rotation;
+		this.scale = scale;
+	}
+	
+	public float getTextureXOffset() {
+		int column = textureIndex%model.getTexture().getNumberOfRows();
+		return (float)column / (float)model.getTexture().getNumberOfRows();
+	}
+	
+	public float getTextureYOffset() {
+		int row = textureIndex%model.getTexture().getNumberOfRows();
+		return (float)row / (float)model.getTexture().getNumberOfRows();
+
+	}
+	
 	
 	public void increasePosition(Vector3f position) {
 		this.position.x += position.x;

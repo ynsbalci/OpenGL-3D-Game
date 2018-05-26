@@ -25,7 +25,7 @@ TO DO LIST
 - [x] Mipmapping
 - [x] Terrain Height Maps
 - [x] Terrain Collision Detection 
-- [ ] Texture Atlases 
+- [x] Texture Atlases 
 - [ ] Rendering GUIs 
 - [ ] Multiple Lights
 - [ ] Point Lights

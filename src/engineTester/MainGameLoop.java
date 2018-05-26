@@ -39,11 +39,15 @@ public class MainGameLoop {
 
         TexturedModel lowPolyTree = new TexturedModel(OBJLoader.loadObjModel("lowPolyTree", loader), new ModelTexture(loader.loadTexture("lowPolyTree")));
         TexturedModel grass = new TexturedModel(OBJLoader.loadObjModel("grassModel", loader), new ModelTexture(loader.loadTexture("grassTexture")));
-        TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern", loader), new ModelTexture(loader.loadTexture("fern")));
         grass.getTexture().setHasTransparancy(true);
-        fern.getTexture().setHasTransparancy(true);
         grass.getTexture().setUseFakeLighting(true);
-        fern.getTexture().setUseFakeLighting(true);
+
+        
+        ModelTexture fernTextureAtlas = new ModelTexture(loader.loadTexture("fern"));
+        fernTextureAtlas.setNumberOfRows(2);
+        
+        TexturedModel fern = new TexturedModel(OBJLoader.loadObjModel("fern", loader), fernTextureAtlas);
+
         
         Terrain terrain = new Terrain(0, -1 , loader, texturePack, blendMap, "heightmap");
         
@@ -55,8 +59,8 @@ public class MainGameLoop {
         	float z = rand.nextFloat() * 800f - 400;
         	float y = terrain.getHeightOfTerrain(x, z);
 			entities.add(new Entity(lowPolyTree, new Vector3f(x, y, z),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
-        	//entities.add(new Entity(grass, new Vector3f(rand.nextFloat() * 800f - 400, 0f, rand.nextFloat() * 800f - 400f),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
-        	//entities.add(new Entity(fern, new Vector3f(rand.nextFloat() * 800f - 400, 0f, rand.nextFloat() * 800f - 400f),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
+        	entities.add(new Entity(grass, new Vector3f(x, y, z),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
+        	entities.add(new Entity(fern, rand.nextInt(4) ,new Vector3f(x, y, z),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
 		}
         
         
@@ -67,9 +71,9 @@ public class MainGameLoop {
         
         MasterRenderer renderer = new MasterRenderer();
         
-        TexturedModel stanfordBunny =  new TexturedModel(OBJLoader.loadObjModel("stanfordBunny", loader), new ModelTexture(loader.loadTexture("white")));
+        TexturedModel person =  new TexturedModel(OBJLoader.loadObjModel("person", loader), new ModelTexture(loader.loadTexture("playerTexture")));
         
-        Player player = new Player(stanfordBunny, new Vector3f(100, 0, 0), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
+        Player player = new Player(person, new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
         
         Camera camera = new Camera(player);
         
