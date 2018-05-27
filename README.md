@@ -28,7 +28,7 @@ TO DO LIST
 - [x] Texture Atlases 
 - [x] Rendering GUIs 
 - [x] Multiple Lights
-- [ ] Point Lights
+- [x] Point Lights
 - [ ] Skybox
 - [ ] Day/Night
 - [ ] Mouse Picking
