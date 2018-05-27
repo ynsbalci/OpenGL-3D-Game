@@ -5,12 +5,15 @@ import java.util.Random;
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
 import entities.Camera;
 import entities.Entity;
 import entities.Light;
 import entities.Player;
+import guis.GuiRenderer;
+import guis.GuiTexture;
 import models.TexturedModel;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
@@ -27,6 +30,7 @@ public class MainGameLoop {
  
         DisplayManager.createDisplay();
         Loader loader = new Loader();
+        MasterRenderer renderer = new MasterRenderer();
         
         TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grassy"));
         TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("dirt"));
@@ -65,18 +69,24 @@ public class MainGameLoop {
         
         
         
-        Light light = new Light(new Vector3f(20000f, 20000f, 20000f), new Vector3f(1, 1, 0));
+     
         
         
-        
-        MasterRenderer renderer = new MasterRenderer();
         
         TexturedModel person =  new TexturedModel(OBJLoader.loadObjModel("person", loader), new ModelTexture(loader.loadTexture("playerTexture")));
-        
         Player player = new Player(person, new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
         
         Camera camera = new Camera(player);
+        Light light = new Light(new Vector3f(20000f, 20000f, 20000f), new Vector3f(1, 1, 0));
         
+        
+        List<GuiTexture> guis = new ArrayList<>();
+        GuiTexture gui = new GuiTexture(loader.loadTexture("socuwan"), new Vector2f(0.5f, 0.5f), new Vector2f(0.25f, 0.25f));
+        guis.add(gui);
+        GuiTexture gui2 = new GuiTexture(loader.loadTexture("thinmatrix"), new Vector2f(0.3f, 0.75f), new Vector2f(0.25f, 0.25f));
+        guis.add(gui2);
+        
+        GuiRenderer guiRenderer = new GuiRenderer(loader);
         
         while(!Display.isCloseRequested()){
         	
@@ -93,9 +103,11 @@ public class MainGameLoop {
 			}
         	
             renderer.render(light, camera);
+            guiRenderer.render(guis);
             DisplayManager.updateDisplay();         
         }
- 
+
+        guiRenderer.cleanUp();
         renderer.cleanUp();
         loader.cleanUp();
         DisplayManager.closeDisplay();

@@ -26,7 +26,7 @@ TO DO LIST
 - [x] Terrain Height Maps
 - [x] Terrain Collision Detection 
 - [x] Texture Atlases 
-- [ ] Rendering GUIs 
+- [x] Rendering GUIs 
 - [ ] Multiple Lights
 - [ ] Point Lights
 - [ ] Skybox
