@@ -59,8 +59,8 @@ public class MainGameLoop {
         List<Entity> entities = new ArrayList<Entity>();
         Random rand = new Random();
         for (int i = 0; i < 500; i++) {
-        	float x = rand.nextFloat() * 800f - 400;
-        	float z = rand.nextFloat() * 800f - 400;
+        	float x = rand.nextFloat() * 800f;
+        	float z = rand.nextFloat() *- 800f;
         	float y = terrain.getHeightOfTerrain(x, z);
 			entities.add(new Entity(lowPolyTree, new Vector3f(x, y, z),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
         	entities.add(new Entity(grass, new Vector3f(x, y, z),  new Vector3f(0f, 0f, 0f),  new Vector3f(1f, 1f, 1f)));
@@ -74,10 +74,15 @@ public class MainGameLoop {
         
         
         TexturedModel person =  new TexturedModel(OBJLoader.loadObjModel("person", loader), new ModelTexture(loader.loadTexture("playerTexture")));
-        Player player = new Player(person, new Vector3f(0, 0, 0), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
+        Player player = new Player(person, new Vector3f(400, 0, -400), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
         
         Camera camera = new Camera(player);
-        Light light = new Light(new Vector3f(20000f, 20000f, 20000f), new Vector3f(1, 1, 0));
+        
+        List<Light> lights = new ArrayList<>();
+
+        lights.add(new Light(new Vector3f(-200, 10, -200), new Vector3f(10, 0, 0)));
+        lights.add(new Light(new Vector3f(-200, 10, -200), new Vector3f(0, 0, 10)));
+        lights.add(new Light(new Vector3f(-200, 10, -200), new Vector3f(0, 10, 0)));
         
         
         List<GuiTexture> guis = new ArrayList<>();
@@ -102,7 +107,7 @@ public class MainGameLoop {
         		renderer.processEntity(entity);
 			}
         	
-            renderer.render(light, camera);
+            renderer.render(lights, camera);
             guiRenderer.render(guis);
             DisplayManager.updateDisplay();         
         }

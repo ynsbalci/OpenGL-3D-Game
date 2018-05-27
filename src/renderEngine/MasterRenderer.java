@@ -57,17 +57,17 @@ public class MasterRenderer {
 		GL11.glDisable(GL11.GL_CULL_FACE);
 	}
 	
-	public void render(Light sun, Camera camera) {
+	public void render(List<Light> ligths, Camera camera) {
 		prepare();
 		shader.start();
 		shader.loadSkyColor(new Vector3f(RED, GREEN, BLUE));
-		shader.loadLight(sun);
+		shader.loadLights(ligths);
 		shader.loadViewMatrix(camera);
 		renderer.render(entities);
 		shader.stop();
 		terrainShader.start();
 		terrainShader.loadSkyColor(new Vector3f(RED, GREEN, BLUE));
-		terrainShader.loadLight(sun);
+		terrainShader.loadLights(ligths);
 		terrainShader.loadViewMatrix(camera);
 		terrainRenderer.render(terrains);
 		terrainShader.stop();

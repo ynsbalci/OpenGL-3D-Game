@@ -27,7 +27,7 @@ TO DO LIST
 - [x] Terrain Collision Detection 
 - [x] Texture Atlases 
 - [x] Rendering GUIs 
-- [ ] Multiple Lights
+- [x] Multiple Lights
 - [ ] Point Lights
 - [ ] Skybox
 - [ ] Day/Night
