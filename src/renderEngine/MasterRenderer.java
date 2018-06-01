@@ -13,6 +13,7 @@ import org.lwjgl.util.vector.Vector3f;
 import models.TexturedModel;
 import shaders.StaticShader;
 import shaders.TerrainShader;
+import skybox.SkyboxRenderer;
 import terrains.Terrain;
 import entities.Camera;
 import entities.Entity;
@@ -40,12 +41,16 @@ public class MasterRenderer {
 	private List<Terrain> terrains = new ArrayList<Terrain>();
 
 
-	public MasterRenderer() {
+	private SkyboxRenderer skyboxRenderer;
+	
+	public MasterRenderer(Loader loader) {
 		GL11.glEnable(GL11.GL_CULL_FACE);
 		GL11.glCullFace(GL11.GL_BACK);
 		createProjectionMatrix();
 		renderer = new EntityRenderer(shader, projectionMatrix);
 		terrainRenderer = new TerrainRenderer(terrainShader, projectionMatrix);
+		skyboxRenderer = new SkyboxRenderer(loader, projectionMatrix);
+		
 	}
 	
 	public static void enableCulling() {
@@ -71,6 +76,7 @@ public class MasterRenderer {
 		terrainShader.loadViewMatrix(camera);
 		terrainRenderer.render(terrains);
 		terrainShader.stop();
+		skyboxRenderer.render(camera);
 		terrains.clear();
 		entities.clear();
 	}

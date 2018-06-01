@@ -29,7 +29,7 @@ TO DO LIST
 - [x] Rendering GUIs 
 - [x] Multiple Lights
 - [x] Point Lights
-- [ ] Skybox
+- [x] Skybox
 - [ ] Day/Night
 - [ ] Mouse Picking
 - [ ] Cel Shading
