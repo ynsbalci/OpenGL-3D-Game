@@ -30,7 +30,7 @@ TO DO LIST
 - [x] Multiple Lights
 - [x] Point Lights
 - [x] Skybox
-- [ ] Day/Night
+- [x] Day/Night
 - [ ] Mouse Picking
 - [ ] Cel Shading
 - [ ] Normal Mapping
