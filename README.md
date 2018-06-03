@@ -33,7 +33,7 @@ TO DO LIST
 - [x] Day/Night
 - [x] Mouse Picking
 - [x] Cel Shading
-- [ ] Normal Mapping
+- [x] Normal Mapping
 - [ ] Font Rendering
 - [ ] Distance Field Text Rendering
 - [ ] Particle Effects
