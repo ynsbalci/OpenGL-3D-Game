@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 import entities.Camera;
 import entities.Entity;
@@ -81,7 +82,7 @@ public class MainGameLoop {
         lights.add(new Light(new Vector3f(400, 10, -400), new Vector3f(2, 0, 0), new Vector3f(1, 0.01f, 0.002f)));
         lights.add(new Light(new Vector3f(400, 10, -410), new Vector3f(2, 0, 0), new Vector3f(1, 0.01f, 0.002f)));
         
-        TexturedModel lamp = new TexturedModel(OBJLoader.loadObjModel("person", loader), new ModelTexture(loader.loadTexture("playerTexture")));
+        TexturedModel lamp = new TexturedModel(OBJLoader.loadObjModel("lamp", loader), new ModelTexture(loader.loadTexture("lamp")));
         Entity lampEntitiy = new Entity(lamp, new Vector3f(400, 0, -400), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
         entities.add(lampEntitiy);
         
@@ -104,7 +105,6 @@ public class MainGameLoop {
         	if (terrainPoint != null) {
 				lampEntitiy.setPosition(terrainPoint);
 			}
-        	System.out.println(picker.getCurrentRay());
         	
         	player.move(terrain);
         	renderer.processEntity(player);
@@ -116,7 +116,7 @@ public class MainGameLoop {
         		renderer.processEntity(entity);
 			}
         	
-            renderer.render(lights, camera);
+            renderer.render(lights, camera, new Vector4f());
             guiRenderer.render(guis);
             DisplayManager.updateDisplay();         
         }

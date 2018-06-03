@@ -32,7 +32,7 @@ TO DO LIST
 - [x] Skybox
 - [x] Day/Night
 - [x] Mouse Picking
-- [ ] Cel Shading
+- [x] Cel Shading
 - [ ] Normal Mapping
 - [ ] Font Rendering
 - [ ] Distance Field Text Rendering

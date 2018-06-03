@@ -9,6 +9,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
+import org.lwjgl.util.vector.Vector4f;
 
 import models.TexturedModel;
 import shaders.StaticShader;
@@ -66,7 +67,16 @@ public class MasterRenderer {
 		return projectionMatrix;
 	}
 	
-	public void render(List<Light> ligths, Camera camera) {
+	public void renderScene(List<Entity> entities, List<Terrain> terrains, List<Light> ligths, Camera camera, Vector4f clipPlane) {
+		for(Terrain terrain: terrains)
+			processTerrain(terrain);
+		for(Entity entity: entities)
+			processEntity(entity);
+		render(ligths, camera, clipPlane);
+	}
+	
+
+	public void render(List<Light> ligths, Camera camera, Vector4f clipPlane) {
 		prepare();
 		shader.start();
 		shader.loadSkyColor(new Vector3f(RED, GREEN, BLUE));
