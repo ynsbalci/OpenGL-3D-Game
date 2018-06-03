@@ -31,7 +31,7 @@ TO DO LIST
 - [x] Point Lights
 - [x] Skybox
 - [x] Day/Night
-- [ ] Mouse Picking
+- [x] Mouse Picking
 - [ ] Cel Shading
 - [ ] Normal Mapping
 - [ ] Font Rendering

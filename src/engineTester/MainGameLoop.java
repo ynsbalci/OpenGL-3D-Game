@@ -23,6 +23,7 @@ import terrains.Terrain;
 import textures.ModelTexture;
 import textures.TerrainTexture;
 import textures.TerrainTexturePack;
+import toolbox.MousePicker;
  
 public class MainGameLoop {
  
@@ -68,11 +69,6 @@ public class MainGameLoop {
 		}
         
         
-        
-     
-        
-        
-        
         TexturedModel person =  new TexturedModel(OBJLoader.loadObjModel("person", loader), new ModelTexture(loader.loadTexture("playerTexture")));
         Player player = new Player(person, new Vector3f(400, 0, -400), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
         
@@ -85,6 +81,9 @@ public class MainGameLoop {
         lights.add(new Light(new Vector3f(400, 10, -400), new Vector3f(2, 0, 0), new Vector3f(1, 0.01f, 0.002f)));
         lights.add(new Light(new Vector3f(400, 10, -410), new Vector3f(2, 0, 0), new Vector3f(1, 0.01f, 0.002f)));
         
+        TexturedModel lamp = new TexturedModel(OBJLoader.loadObjModel("person", loader), new ModelTexture(loader.loadTexture("playerTexture")));
+        Entity lampEntitiy = new Entity(lamp, new Vector3f(400, 0, -400), new Vector3f(0, 0, 0), new Vector3f(1, 1, 1));
+        entities.add(lampEntitiy);
         
         List<GuiTexture> guis = new ArrayList<>();
         GuiTexture gui = new GuiTexture(loader.loadTexture("socuwan"), new Vector2f(0.5f, 0.5f), new Vector2f(0.25f, 0.25f));
@@ -94,10 +93,19 @@ public class MainGameLoop {
         
         GuiRenderer guiRenderer = new GuiRenderer(loader);
         
+        MousePicker picker = new MousePicker(camera, renderer.getProjectionMatrix(), terrain);
+        
         while(!Display.isCloseRequested()){
         	
         	
         	camera.move();
+        	picker.update();
+        	Vector3f terrainPoint = picker.getCurrentTerrainPoint();
+        	if (terrainPoint != null) {
+				lampEntitiy.setPosition(terrainPoint);
+			}
+        	System.out.println(picker.getCurrentRay());
+        	
         	player.move(terrain);
         	renderer.processEntity(player);
         	
