@@ -34,8 +34,8 @@ TO DO LIST
 - [x] Mouse Picking
 - [x] Cel Shading
 - [x] Normal Mapping
-- [ ] Font Rendering
-- [ ] Distance Field Text Rendering
+- [x] Font Rendering
+- [x] Distance Field Text Rendering
 - [ ] Particle Effects
 - [ ] Animating Particle Textures
 - [ ] Instanced Rendering
