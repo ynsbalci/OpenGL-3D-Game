@@ -36,7 +36,7 @@ TO DO LIST
 - [x] Normal Mapping
 - [x] Font Rendering
 - [x] Distance Field Text Rendering
-- [ ] Particle Effects
+- [x] Particle Effects
 - [ ] Animating Particle Textures
 - [ ] Instanced Rendering
 - [ ] Procedural Terrain
