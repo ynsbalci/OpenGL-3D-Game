@@ -37,7 +37,7 @@ TO DO LIST
 - [x] Font Rendering
 - [x] Distance Field Text Rendering
 - [x] Particle Effects
-- [ ] Animating Particle Textures
+- [x] Animating Particle Textures
 - [ ] Instanced Rendering
 - [ ] Procedural Terrain
 - [ ] Shadow Mapping (1/2)

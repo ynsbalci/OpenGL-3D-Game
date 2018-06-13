@@ -30,6 +30,7 @@ import particles.Particle;
 import particles.ParticleMaster;
 import particles.ParticleRenderer;
 import particles.ParticleSystem;
+import particles.ParticleTexture;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.MasterRenderer;
@@ -182,7 +183,13 @@ public class MainGameLoop {
 		WaterTile water = new WaterTile(75, -75, 0);
 		waters.add(water);
 		
-		ParticleSystem system = new ParticleSystem(50, 25, 0.3f, 4, 1);
+		ParticleTexture particleTexture = new ParticleTexture(loader.loadTexture("particleAtlas"), 4, true);
+		
+		ParticleSystem system = new ParticleSystem(particleTexture, 40, 10, 0.1f, 1, 1.6f);
+		system.setLifeError(0.1f);
+		system.setSpeedError(0.25f);
+		system.setScaleError(0.5f);
+		system.randomizeRotation();
 		
 		//****************Game Loop Below*********************
 
@@ -194,7 +201,8 @@ public class MainGameLoop {
 			
 			system.generateParticles(player.getPosition());
 			
-			ParticleMaster.update();
+			ParticleMaster.update(camera);
+
 			
 			entity.increaseRotation(0, 1, 0);
 			entity2.increaseRotation(0, 1, 0);
