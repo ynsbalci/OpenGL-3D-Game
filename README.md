@@ -39,7 +39,7 @@ TO DO LIST
 - [x] Particle Effects
 - [x] Animating Particle Textures
 - [x] Instanced Rendering
-- [ ] Procedural Terrain
+- [x] Procedural Terrain
 - [ ] Shadow Mapping (1/2)
 - [ ]  Shadow Mapping (2/2)
 - [ ] Percentage Closer Filtering
