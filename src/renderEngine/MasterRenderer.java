@@ -17,14 +17,15 @@ import models.TexturedModel;
 import normalMappingRenderer.NormalMappingRenderer;
 import shaders.StaticShader;
 import shaders.TerrainShader;
+import shadows.ShadowMapMasterRenderer;
 import skybox.SkyboxRenderer;
 import terrains.Terrain;
 
 public class MasterRenderer {
 
-	private static final float FOV = 70;
-	private static final float NEAR_PLANE = 0.1f;
-	private static final float FAR_PLANE = 1000;
+	public static final float FOV = 70;
+	public static final float NEAR_PLANE = 0.1f;
+	public static final float FAR_PLANE = 1000;
 
 	public static final float RED = 0.1f;
 	public static final float GREEN = 0.4f;
@@ -41,18 +42,20 @@ public class MasterRenderer {
 	private NormalMappingRenderer normalMapRenderer;
 
 	private SkyboxRenderer skyboxRenderer;
+	private ShadowMapMasterRenderer shadowMapMasterRenderer;
 
 	private Map<TexturedModel, List<Entity>> entities = new HashMap<TexturedModel, List<Entity>>();
 	private Map<TexturedModel, List<Entity>> normalMapEntities = new HashMap<TexturedModel, List<Entity>>();
 	private List<Terrain> terrains = new ArrayList<Terrain>();
 
-	public MasterRenderer(Loader loader) {
+	public MasterRenderer(Loader loader, Camera camera) {
 		enableCulling();
 		createProjectionMatrix();
 		renderer = new EntityRenderer(shader, projectionMatrix);
 		terrainRenderer = new TerrainRenderer(terrainShader, projectionMatrix);
 		skyboxRenderer = new SkyboxRenderer(loader, projectionMatrix);
 		normalMapRenderer = new NormalMappingRenderer(projectionMatrix);
+		this.shadowMapMasterRenderer = new ShadowMapMasterRenderer(camera);
 	}
 
 	public Matrix4f getProjectionMatrix() {
@@ -133,10 +136,23 @@ public class MasterRenderer {
 		}
 	}
 
+	public void renderShadowMap(List<Entity> entityList, Light sun) {
+		for(Entity entity : entityList) {
+			processEntity(entity);
+		}
+		shadowMapMasterRenderer.render(entities, sun);
+		entities.clear();
+	}
+	
+	public int getShadowMapTexture() {
+		return shadowMapMasterRenderer.getShadowMap();
+	}
+	
 	public void cleanUp() {
 		shader.cleanUp();
 		terrainShader.cleanUp();
 		normalMapRenderer.cleanUp();
+		shadowMapMasterRenderer.cleanUp();
 	}
 
 	public void prepare() {
