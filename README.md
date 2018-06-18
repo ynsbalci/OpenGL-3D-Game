@@ -35,10 +35,10 @@ TO DO LIST
 - [x] Cel Shading
 - [x] Normal Mapping
 - [x] Font Rendering
-- [x] Distance Field Text Rendering
+- [x] Distance Field Text Rendering 
 - [x] Particle Effects
 - [x] Animating Particle Textures
-- [ ] Instanced Rendering
+- [x] Instanced Rendering
 - [ ] Procedural Terrain
 - [ ] Shadow Mapping (1/2)
 - [ ]  Shadow Mapping (2/2)
