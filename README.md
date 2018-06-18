@@ -40,7 +40,7 @@ TO DO LIST
 - [x] Animating Particle Textures
 - [x] Instanced Rendering
 - [x] Procedural Terrain
-- [ ] Shadow Mapping (1/2)
+- [x] Shadow Mapping (1/2)
 - [ ]  Shadow Mapping (2/2)
 - [ ] Percentage Closer Filtering
 - [ ] Antialiasing and Anisotropic Filtering
