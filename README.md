@@ -43,7 +43,7 @@ TO DO LIST
 - [x] Shadow Mapping (1/2)
 - [x] Shadow Mapping (2/2)
 - [x] Percentage Closer Filtering
-- [ ] Antialiasing and Anisotropic Filtering
+- [x] Antialiasing and Anisotropic Filtering
 - [ ] Exporting a LWJGL Game
 - [ ] Post-Processing Effects
 - [ ] Gaussian Blur
