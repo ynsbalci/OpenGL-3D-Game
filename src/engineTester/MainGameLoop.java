@@ -178,7 +178,7 @@ public class MainGameLoop {
 		
 		GuiTexture shadowMap = new GuiTexture(renderer.getShadowMapTexture(), new Vector2f(0.5f, 0.5f), new Vector2f(0.5f, 0.5f));
 		
-		guiTextures.add(shadowMap);
+		//guiTextures.add(shadowMap);
 		
 		GuiRenderer guiRenderer = new GuiRenderer(loader);
 		MousePicker picker = new MousePicker(camera, renderer.getProjectionMatrix(), terrain);
