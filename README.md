@@ -41,8 +41,8 @@ TO DO LIST
 - [x] Instanced Rendering
 - [x] Procedural Terrain
 - [x] Shadow Mapping (1/2)
-- [x]  Shadow Mapping (2/2)
-- [ ] Percentage Closer Filtering
+- [x] Shadow Mapping (2/2)
+- [x] Percentage Closer Filtering
 - [ ] Antialiasing and Anisotropic Filtering
 - [ ] Exporting a LWJGL Game
 - [ ] Post-Processing Effects
