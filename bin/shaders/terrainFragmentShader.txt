@@ -32,8 +32,8 @@ void main(void){
 	float total = 0.0;
 	
 	
-	for(int x = -pcfCount: x <= pcfCount; x++){
-		for(int y = -pcfCount: y <= pcfCount; y++){
+	for(int x = -pcfCount; x <= pcfCount; x++){
+		for(int y = -pcfCount; y <= pcfCount; y++){
 			float objectNearstLight = texture(shadowMap, shadowCoords.xy + vec2(x, y) * texelSize).r;
 			if(shadowCoords.z > objectNearstLight){
 				total += 1.0;

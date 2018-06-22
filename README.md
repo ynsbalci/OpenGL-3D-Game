@@ -45,7 +45,7 @@ TO DO LIST
 - [x] Percentage Closer Filtering
 - [x] Antialiasing and Anisotropic Filtering
 - [ ] Exporting a LWJGL Game
-- [ ] Post-Processing Effects
+- [x] Post-Processing Effects
 - [ ] Gaussian Blur
 - [ ] Multisampled FBOs
 - [ ] Specular Maps

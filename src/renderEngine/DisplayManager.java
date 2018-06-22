@@ -26,7 +26,7 @@ public class DisplayManager {
 		try {
 			Display.setDisplayMode(new DisplayMode(WIDTH,HEIGHT));
 			Display.create(new PixelFormat().withSamples(8), attribs);
-			Display.setTitle("Our First Display!");
+			Display.setTitle("Open GL 3D Game!");
 			GL11.glEnable(GL13.GL_MULTISAMPLE);
 		} catch (LWJGLException e) {
 			e.printStackTrace();

@@ -3,6 +3,7 @@ package terrains;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 
@@ -93,7 +94,9 @@ public class Terrain {
 		
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(new File("res/" + heightMap + ".png"));
+			
+			image = ImageIO.read(Class.class.getResourceAsStream("/res/" + heightMap + ".png"));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -31,6 +31,8 @@ import particles.ParticleMaster;
 import particles.ParticleRenderer;
 import particles.ParticleSystem;
 import particles.ParticleTexture;
+import postProcessing.Fbo;
+import postProcessing.PostProcessing;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.MasterRenderer;
@@ -63,7 +65,7 @@ public class MainGameLoop {
 		MasterRenderer renderer = new MasterRenderer(loader, camera);
 		ParticleMaster.init(loader, renderer.getProjectionMatrix());
 		
-		FontType font = new FontType(loader.loadTexture("candara"), new File("res/candara.fnt"));
+		FontType font = new FontType(loader.loadTexture("candara"), "candara");
 		GUIText text = new GUIText("ynsbalci", 3f, font, new Vector2f(0f, 0f), 1f, true);
 		text.setColour(0, 0, 1);
 
@@ -200,6 +202,9 @@ public class MainGameLoop {
 		system.setScaleError(0.5f);
 		system.randomizeRotation();
 		
+		Fbo fbo = new Fbo(Display.getWidth(), Display.getHeight(), Fbo.DEPTH_RENDER_BUFFER);
+		PostProcessing.init(loader);
+		
 		//****************Game Loop Below*********************
 
 		while (!Display.isCloseRequested()) {
@@ -225,6 +230,9 @@ public class MainGameLoop {
 			
 			//render refraction texture
 			buffers.bindRefractionFrameBuffer();
+			
+			//fbo.bindFrameBuffer();
+			
 			renderer.renderScene(entities, normalMapEntities, terrains, lights, camera, new Vector4f(0, -1, 0, water.getHeight()));
 			
 			//render to screen
@@ -235,6 +243,9 @@ public class MainGameLoop {
 			
 			ParticleMaster.renderParticles(camera);
 			
+			fbo.unbindFrameBuffer();
+			PostProcessing.doPostProcessing(fbo.getColourTexture());
+			
 			guiRenderer.render(guiTextures);
 			TextMaster.render();
 			
@@ -242,6 +253,9 @@ public class MainGameLoop {
 		}
 
 		//*********Clean Up Below**************
+		PostProcessing.cleanUp();
+		fbo.cleanUp();
+		
 		ParticleMaster.cleanUp();
 		TextMaster.cleanUp();
 		buffers.cleanUp();
