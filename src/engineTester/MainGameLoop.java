@@ -244,7 +244,7 @@ public class MainGameLoop {
 			ParticleMaster.renderParticles(camera);
 			
 			fbo.unbindFrameBuffer();
-			PostProcessing.doPostProcessing(fbo.getColourTexture());
+			//PostProcessing.doPostProcessing(fbo.getColourTexture());
 			
 			guiRenderer.render(guiTextures);
 			TextMaster.render();

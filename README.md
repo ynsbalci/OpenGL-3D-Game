@@ -46,7 +46,7 @@ TO DO LIST
 - [x] Antialiasing and Anisotropic Filtering
 - [ ] Exporting a LWJGL Game
 - [x] Post-Processing Effects
-- [ ] Gaussian Blur
+- [x] Gaussian Blur
 - [ ] Multisampled FBOs
 - [ ] Specular Maps
 - [ ] Bloom Effect
