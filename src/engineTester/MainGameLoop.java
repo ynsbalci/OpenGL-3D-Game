@@ -202,7 +202,8 @@ public class MainGameLoop {
 		system.setScaleError(0.5f);
 		system.randomizeRotation();
 		
-		Fbo fbo = new Fbo(Display.getWidth(), Display.getHeight(), Fbo.DEPTH_RENDER_BUFFER);
+		Fbo multisampleFbo = new Fbo(Display.getWidth(), Display.getHeight());
+		Fbo outputFbo = new Fbo(Display.getWidth(), Display.getHeight(), Fbo.DEPTH_TEXTURE);
 		PostProcessing.init(loader);
 		
 		//****************Game Loop Below*********************
@@ -242,9 +243,11 @@ public class MainGameLoop {
 			waterRenderer.render(waters, camera, sun);
 			
 			ParticleMaster.renderParticles(camera);
-			
-			fbo.unbindFrameBuffer();
-			//PostProcessing.doPostProcessing(fbo.getColourTexture());
+
+			multisampleFbo.unbindFrameBuffer();
+			multisampleFbo.resolveToFbo(outputFbo);
+			multisampleFbo.resolveToScreen();
+			//PostProcessing.doPostProcessing(outputFbo.getColourTexture());
 			
 			guiRenderer.render(guiTextures);
 			TextMaster.render();
@@ -254,7 +257,8 @@ public class MainGameLoop {
 
 		//*********Clean Up Below**************
 		PostProcessing.cleanUp();
-		fbo.cleanUp();
+		outputFbo.cleanUp();
+		multisampleFbo.cleanUp();
 		
 		ParticleMaster.cleanUp();
 		TextMaster.cleanUp();

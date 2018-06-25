@@ -47,7 +47,7 @@ TO DO LIST
 - [ ] Exporting a LWJGL Game
 - [x] Post-Processing Effects
 - [x] Gaussian Blur
-- [ ] Multisampled FBOs
+- [x] Multisampled FBOs
 - [ ] Specular Maps
 - [ ] Bloom Effect
 - [ ] Multiple Render Targets
