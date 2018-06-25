@@ -48,7 +48,7 @@ TO DO LIST
 - [x] Post-Processing Effects
 - [x] Gaussian Blur
 - [x] Multisampled FBOs
-- [ ] Specular Maps
+- [x] Specular Maps
 - [ ] Bloom Effect
 - [ ] Multiple Render Targets
 - [ ] Geometry Shader Introduction

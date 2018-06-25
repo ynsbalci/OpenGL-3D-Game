@@ -108,6 +108,15 @@ public class MainGameLoop {
 		List<Entity> entities = new ArrayList<Entity>();
 		List<Entity> normalMapEntities = new ArrayList<Entity>();
 		
+		TexturedModel lantern = new TexturedModel(OBJFileLoader.loadOBJ("lantern", loader), new ModelTexture(loader.loadTexture("lantern")));
+		lantern.getTexture().setSpecularMap(loader.loadTexture("lanternS"));
+		
+		TexturedModel cherryModel = new TexturedModel(OBJFileLoader.loadOBJ("cherry", loader), new ModelTexture(loader.loadTexture("cherry")));
+		cherryModel.getTexture().setHasTransparency(true);
+		cherryModel.getTexture().setShineDamper(10);
+		cherryModel.getTexture().setReflectivity(0.5f);
+		cherryModel.getTexture().setSpecularMap(loader.loadTexture("cherryS"));
+		
 		//******************NORMAL MAP MODELS************************
 		
 		TexturedModel barrelModel = new TexturedModel(NormalMappedObjLoader.loadOBJ("barrel", loader),

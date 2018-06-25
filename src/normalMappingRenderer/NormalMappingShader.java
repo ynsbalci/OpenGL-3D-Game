@@ -32,6 +32,8 @@ public class NormalMappingShader extends ShaderProgram{
 	private int location_modelTexture;
 	private int location_normalMap;
 
+	private int location_usesSpecularMap;
+	
 	public NormalMappingShader() {
 		super(VERTEX_FILE, FRAGMENT_FILE);
 	}
@@ -71,6 +73,11 @@ public class NormalMappingShader extends ShaderProgram{
 	protected void connectTextureUnits(){
 		super.loadInt(location_modelTexture, 0);
 		super.loadInt(location_normalMap, 1);
+		super.loadInt(location_usesSpecularMap, 2);
+	}
+	
+	protected void loadUseSpecularMap(boolean useMap) {
+		super.loadBoolean(location_usesSpecularMap, useMap);
 	}
 	
 	protected void loadClipPlane(Vector4f plane){
