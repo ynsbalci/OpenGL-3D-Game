@@ -49,7 +49,7 @@ TO DO LIST
 - [x] Gaussian Blur
 - [x] Multisampled FBOs
 - [x] Specular Maps
-- [ ] Bloom Effect
+- [x] Bloom Effect
 - [ ] Multiple Render Targets
 - [ ] Geometry Shader Introduction
 - [ ] Geometry Shader Examples
