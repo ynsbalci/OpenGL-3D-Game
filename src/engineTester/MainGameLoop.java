@@ -1,15 +1,13 @@
 package engineTester;
 
 import org.lwjgl.opengl.Display;
-import org.lwjgl.util.vector.Vector3f;
 
 import entities.Camera;
-import entities.Entity;
-import models.RawModel;
+import models.ParticlesVao;
+import particles.ParticleSystem;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.Renderer;
-import shaders.StaticShader;
 
 public class MainGameLoop {
 
@@ -17,39 +15,25 @@ public class MainGameLoop {
 
 		DisplayManager.createDisplay();
 		Loader loader = new Loader();
-		StaticShader shader = new StaticShader();
-		Renderer renderer = new Renderer(shader);
-		
-		float[] vertices = {			
-				0f,0f,0f,
-				2.5f,0f,0f,
-				-2.5f,0f,0f,
-		};
-		
-		float[] baseColours = {			
-				1f, 1f, 1f,
-				1f, 1f, 0f,
-				0f, 1f, 1f,
-		};
+		Renderer renderer = new Renderer();
 
 		
-		RawModel model = loader.loadToVAO(vertices, baseColours);	
-		Entity entity = new Entity(model, new Vector3f(0,0,-5),0,0,0,1);
+		ParticlesVao vao = ParticlesVao.create(loader);
 		
 		Camera camera = new Camera();
 		
+		ParticleSystem particles = new ParticleSystem();
+		
 		while(!Display.isCloseRequested()){
-			entity.increaseRotation(0, 1, 0);
 			camera.move();
+			particles.update();
+			vao.store(particles.getParticles());
 			renderer.prepare();
-			shader.start();
-			shader.loadViewMatrix(camera);
-			renderer.render(entity,shader);
-			shader.stop();
+			renderer.render(vao, camera);
 			DisplayManager.updateDisplay();
 		}
 
-		shader.cleanUp();
+		renderer.cleanUp();
 		loader.cleanUp();
 		DisplayManager.closeDisplay();
 

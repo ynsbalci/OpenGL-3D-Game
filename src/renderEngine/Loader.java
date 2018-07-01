@@ -1,71 +1,86 @@
 package renderEngine;
 
+import java.io.FileInputStream;
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
+import org.newdawn.slick.opengl.Texture;
+import org.newdawn.slick.opengl.TextureLoader;
 
-import models.RawModel;
+import models.ParticlesVao;
 
 public class Loader {
-	
+
 	private List<Integer> vaos = new ArrayList<Integer>();
 	private List<Integer> vbos = new ArrayList<Integer>();
 	private List<Integer> textures = new ArrayList<Integer>();
-	
-	public RawModel loadToVAO(float[] positions, float[] colours){
+
+	public ParticlesVao createEmptyVAO(int maxParticles) {
 		int vaoID = createVAO();
-		storeDataInAttributeList(0,3,positions);
-		storeDataInAttributeList(1,3,colours);
+		int vbo = createEmptyVbo(maxParticles);
 		unbindVAO();
-		return new RawModel(vaoID, positions.length/3);
+		return new ParticlesVao(vaoID, vbo, this);
 	}
-	
-	public void cleanUp(){
-		for(int vao:vaos){
+
+	public int loadTexture(String fileName) {
+		Texture texture = null;
+		try {
+			texture = TextureLoader.getTexture("PNG", new FileInputStream("res/" + fileName + ".png"));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Tried to load texture " + fileName + ".png , didn't work");
+			System.exit(-1);
+		}
+		textures.add(texture.getTextureID());
+		return texture.getTextureID();
+	}
+
+	public void cleanUp() {
+		for (int vao : vaos) {
 			GL30.glDeleteVertexArrays(vao);
 		}
-		for(int vbo:vbos){
+		for (int vbo : vbos) {
 			GL15.glDeleteBuffers(vbo);
 		}
-		for(int texture:textures){
+		for (int texture : textures) {
 			GL11.glDeleteTextures(texture);
 		}
 	}
-	
-	private int createVAO(){
+
+	private int createVAO() {
 		int vaoID = GL30.glGenVertexArrays();
 		vaos.add(vaoID);
 		GL30.glBindVertexArray(vaoID);
 		return vaoID;
 	}
-	
-	private void storeDataInAttributeList(int attributeNumber, int coordinateSize,float[] data){
+
+	private int createEmptyVbo(int maxParticles) {
 		int vboID = GL15.glGenBuffers();
 		vbos.add(vboID);
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vboID);
-		FloatBuffer buffer = storeDataInFloatBuffer(data);
-		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer, GL15.GL_STATIC_DRAW);
-		GL20.glVertexAttribPointer(attributeNumber,coordinateSize,GL11.GL_FLOAT,false,0,0);
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, maxParticles * 4, GL15.GL_DYNAMIC_DRAW);
+		GL20.glVertexAttribPointer(0, 3, GL11.GL_FLOAT, false, 0, 0);
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
+		return vboID;
+	}
+
+	public void updateVbo(int vbo, float[] data, FloatBuffer buffer) {
+		buffer.clear();
+		buffer.put(data);
+		buffer.flip();
+		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, vbo);
+		GL15.glBufferData(GL15.GL_ARRAY_BUFFER, buffer.capacity() * 4, GL15.GL_STREAM_DRAW);
+		GL15.glBufferSubData(GL15.GL_ARRAY_BUFFER, 0, buffer);
 		GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
 	}
 	
-	private void unbindVAO(){
+	private void unbindVAO() {
 		GL30.glBindVertexArray(0);
 	}
-	
-	private FloatBuffer storeDataInFloatBuffer(float[] data){
-		FloatBuffer buffer = BufferUtils.createFloatBuffer(data.length);
-		buffer.put(data);
-		buffer.flip();
-		return buffer;
-	}
-	
-	
 
 }

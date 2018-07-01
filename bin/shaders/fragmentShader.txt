@@ -1,11 +1,11 @@
 #version 150
 
-out vec4 out_Color;
+in vec3 finalColour;
 
-in vec3 colour;
+out vec4 out_Colour;
 
 void main(void){
 
-	out_Color = vec4(colour, 1.0);
+	out_Colour = vec4(finalColour, 1.0);
 
 }

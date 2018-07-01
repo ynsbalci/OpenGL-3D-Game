@@ -6,44 +6,47 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.vector.Matrix4f;
 
-import entities.Entity;
-import models.RawModel;
+import entities.Camera;
+import models.ParticlesVao;
 import shaders.StaticShader;
 import toolbox.Maths;
 
 public class Renderer {
 	
-	private static final float FOV = 70;
+	private static final float FOV = 40;
 	private static final float NEAR_PLANE = 0.1f;
 	private static final float FAR_PLANE = 1000;
 	
 	private Matrix4f projectionMatrix;
+	private StaticShader shader;
 	
-	public Renderer(StaticShader shader){
+	public Renderer(){
+		this.shader = new StaticShader();
 		createProjectionMatrix();
-		shader.start();
-		shader.loadProjectionMatrix(projectionMatrix);
-		shader.stop();
 	}
 
 	public void prepare() {
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		GL11.glEnable(GL11.GL_CULL_FACE);
+		GL11.glCullFace(GL11.GL_BACK);
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT|GL11.GL_DEPTH_BUFFER_BIT);
-		GL11.glClearColor(0, 0.3f, 0.0f, 1);
+		GL11.glClearColor(0.2f, 0.38f, 0.31f, 1);
+		GL11.glEnable(GL20.GL_VERTEX_PROGRAM_POINT_SIZE);
 	}
 
-	public void render(Entity entity, StaticShader shader) {
-		RawModel rawModel = entity.getModel();
-		GL30.glBindVertexArray(rawModel.getVaoID());
+	public void render(ParticlesVao particles, Camera camera) {
+		shader.start();
+		loadProjectionViewMatrix(camera);
+		GL30.glBindVertexArray(particles.getVaoID());
 		GL20.glEnableVertexAttribArray(0);
-		GL20.glEnableVertexAttribArray(1);
-		Matrix4f transformationMatrix = Maths.createTransformationMatrix(entity.getPosition(),
-				entity.getRotX(), entity.getRotY(), entity.getRotZ(), entity.getScale());
-		shader.loadTransformationMatrix(transformationMatrix);
-		GL11.glDrawArrays(GL11.GL_POINTS, 0, rawModel.getVertexCount());
+		GL11.glDrawArrays(GL11.GL_POINTS, 0, particles.getParticleCount());
 		GL20.glDisableVertexAttribArray(0);
-		GL20.glDisableVertexAttribArray(1);
 		GL30.glBindVertexArray(0);
+		shader.stop();
+	}
+	
+	public void cleanUp(){
+		shader.cleanUp();
 	}
 	
     private void createProjectionMatrix(){
@@ -59,6 +62,12 @@ public class Renderer {
 		projectionMatrix.m23 = -1;
 		projectionMatrix.m32 = -((2 * NEAR_PLANE * FAR_PLANE) / frustum_length);
 		projectionMatrix.m33 = 0;
+    }
+    
+    private void loadProjectionViewMatrix(Camera camera){
+    	Matrix4f viewMat = Maths.createViewMatrix(camera);
+    	Matrix4f projView = Matrix4f.mul(projectionMatrix, viewMat, null);
+    	shader.loadProjectionViewMatrix(projView);
     }
 
 }

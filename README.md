@@ -51,7 +51,7 @@ TO DO LIST
 - [x] Specular Maps
 - [x] Bloom Effect
 - [x] Multiple Render Targets
-- [ ] Geometry Shader Introduction
+- [x] Geometry Shader Introduction
 - [ ] Geometry Shader Examples
 - [ ] Cube Map Reflections
 - [ ] Render to Cube Map Texture
