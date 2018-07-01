@@ -52,7 +52,7 @@ TO DO LIST
 - [x] Bloom Effect
 - [x] Multiple Render Targets
 - [x] Geometry Shader Introduction
-- [ ] Geometry Shader Examples
+- [x] Geometry Shader Examples
 - [ ] Cube Map Reflections
 - [ ] Render to Cube Map Texture
 - [ ] Lens Flare
