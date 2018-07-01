@@ -1,15 +1,16 @@
 package entities;
 
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.util.vector.Vector3f;
 
 public class Camera {
 	
-	private float distanceFromPlayer = 35;
-	private float angleAroundPlayer = 110;
+	private float distanceFromPlayer = 7;
+	private float angleAroundPlayer = 0;
 	
 	private Vector3f position = new Vector3f(0, 0, 0);
-	private float pitch = 30;
+	private float pitch = 10;
 	private float yaw = 0;
 	private float roll;
 	
@@ -17,7 +18,6 @@ public class Camera {
 	}
 	
 	public void move(){
-		calculateZoom();
 		calculatePitch();
 		calculateAngleAroundPlayer();
 		float horizontalDistance = calculateHorizontalDistance();
@@ -53,7 +53,7 @@ public class Camera {
 		float offsetZ = (float) (horizDistance * Math.cos(Math.toRadians(theta)));
 		position.x = offsetX;
 		position.z = offsetZ;
-		position.y = verticDistance;
+		position.y = verticDistance+2;
 	}
 	
 	private float calculateHorizontalDistance(){
@@ -64,20 +64,12 @@ public class Camera {
 		return (float) (distanceFromPlayer * Math.sin(Math.toRadians(pitch)));
 	}
 	
-	private void calculateZoom(){
-		float zoomLevel = Mouse.getDWheel() * 0.03f;
-		distanceFromPlayer -= zoomLevel;
-		if(distanceFromPlayer<5){
-			distanceFromPlayer = 5;
-		}
-	}
-	
 	private void calculatePitch(){
 		if(Mouse.isButtonDown(1)){
 			float pitchChange = Mouse.getDY() * 0.2f;
 			pitch -= pitchChange;
-			if(pitch < -10){
-				pitch = -10;
+			if(pitch < 4){
+				pitch = 4;
 			}else if(pitch > 90){
 				pitch = 90;
 			}
@@ -88,6 +80,8 @@ public class Camera {
 		if(Mouse.isButtonDown(0)){
 			float angleChange = Mouse.getDX() * 0.3f;
 			angleAroundPlayer -= angleChange;
+		}else if(Keyboard.isKeyDown(Keyboard.KEY_R)){
+			angleAroundPlayer+= 0.5f;
 		}
 	}
 	
