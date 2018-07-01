@@ -1,19 +1,17 @@
 package entities;
 
-import models.TexturedModel;
-
 import org.lwjgl.util.vector.Vector3f;
+
+import models.RawModel;
 
 public class Entity {
 
-	private TexturedModel model;
+	private RawModel model;
 	private Vector3f position;
 	private float rotX, rotY, rotZ;
 	private float scale;
-	
-	private int textureIndex = 0;
 
-	public Entity(TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ,
+	public Entity(RawModel model, Vector3f position, float rotX, float rotY, float rotZ,
 			float scale) {
 		this.model = model;
 		this.position = position;
@@ -21,27 +19,6 @@ public class Entity {
 		this.rotY = rotY;
 		this.rotZ = rotZ;
 		this.scale = scale;
-	}
-	
-	public Entity(TexturedModel model, int index, Vector3f position, float rotX, float rotY, float rotZ,
-			float scale) {
-		this.textureIndex = index;
-		this.model = model;
-		this.position = position;
-		this.rotX = rotX;
-		this.rotY = rotY;
-		this.rotZ = rotZ;
-		this.scale = scale;
-	}
-	
-	public float getTextureXOffset(){
-		int column = textureIndex%model.getTexture().getNumberOfRows();
-		return (float)column/(float)model.getTexture().getNumberOfRows();
-	}
-	
-	public float getTextureYOffset(){
-		int row = textureIndex/model.getTexture().getNumberOfRows();
-		return (float)row/(float)model.getTexture().getNumberOfRows();
 	}
 
 	public void increasePosition(float dx, float dy, float dz) {
@@ -56,12 +33,8 @@ public class Entity {
 		this.rotZ += dz;
 	}
 
-	public TexturedModel getModel() {
+	public RawModel getModel() {
 		return model;
-	}
-
-	public void setModel(TexturedModel model) {
-		this.model = model;
 	}
 
 	public Vector3f getPosition() {
