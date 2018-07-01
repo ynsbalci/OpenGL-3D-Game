@@ -50,7 +50,7 @@ TO DO LIST
 - [x] Multisampled FBOs
 - [x] Specular Maps
 - [x] Bloom Effect
-- [ ] Multiple Render Targets
+- [x] Multiple Render Targets
 - [ ] Geometry Shader Introduction
 - [ ] Geometry Shader Examples
 - [ ] Cube Map Reflections

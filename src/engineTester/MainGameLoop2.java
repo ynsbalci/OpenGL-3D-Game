@@ -47,13 +47,34 @@ import water.WaterRenderer;
 import water.WaterShader;
 import water.WaterTile;
 
-public class MainGameLoop {
+public class MainGameLoop2 {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 
 		DisplayManager.createDisplay();
 		Loader loader = new Loader();
 		TextMaster.init(loader);
+		TexturedModel playerModel = new TexturedModel(OBJLoader.loadObjModel("person", loader), new ModelTexture(loader.loadTexture("playerTexture")));
+		
+		Player player = new Player(playerModel, new Vector3f(300, 5, -400), 0, 100, 0, 0.6f);
+		Camera camera = new Camera(player);
+		MasterRenderer renderer = new MasterRenderer(loader, camera);
+		ParticleMaster.init(loader, renderer.getProjectionMatrix());
+		
+		// ********** TEXT ********** //
+		
+		FontType font = new FontType(loader.loadTexture("candara"), "candara");
+		GUIText text = new GUIText("ynsbalci", 3f, font, new Vector2f(0f, 0f), 1f, true);
+		text.setColour(0, 0, 1);
+		
+		
+		// *********TERRAIN TEXTURE STUFF**********
+		
+		TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grassy2"));
+		TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud"));
+		TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("grassFlowers"));
+		TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path"));
+		
 		
 		RawModel bunnyModel = OBJLoader.loadObjModel("person", loader);
 		TexturedModel stanfordBunny = new TexturedModel(bunnyModel, new ModelTexture(
@@ -69,12 +90,7 @@ public class MainGameLoop {
 		GUIText text = new GUIText("ynsbalci", 3f, font, new Vector2f(0f, 0f), 1f, true);
 		text.setColour(0, 0, 1);
 
-		// *********TERRAIN TEXTURE STUFF**********
 		
-		TerrainTexture backgroundTexture = new TerrainTexture(loader.loadTexture("grassy2"));
-		TerrainTexture rTexture = new TerrainTexture(loader.loadTexture("mud"));
-		TerrainTexture gTexture = new TerrainTexture(loader.loadTexture("grassFlowers"));
-		TerrainTexture bTexture = new TerrainTexture(loader.loadTexture("path"));
 
 		TerrainTexturePack texturePack = new TerrainTexturePack(backgroundTexture, rTexture,
 				gTexture, bTexture);
@@ -213,8 +229,6 @@ public class MainGameLoop {
 		
 		Fbo multisampleFbo = new Fbo(Display.getWidth(), Display.getHeight());
 		Fbo outputFbo = new Fbo(Display.getWidth(), Display.getHeight(), Fbo.DEPTH_TEXTURE);
-		Fbo outputFbo2 = new Fbo(Display.getWidth(), Display.getHeight(), Fbo.DEPTH_TEXTURE);
-		
 		PostProcessing.init(loader);
 		
 		//****************Game Loop Below*********************
@@ -250,15 +264,15 @@ public class MainGameLoop {
 			//render to screen
 			GL11.glDisable(GL30.GL_CLIP_DISTANCE0);
 			buffers.unbindCurrentFrameBuffer();	
-			
-			multisampleFbo.bindFrameBuffer();
 			renderer.renderScene(entities, normalMapEntities, terrains, lights, camera, new Vector4f(0, -1, 0, 100000));	
-			waterRenderer.render(waters, camera, sun);	
+			waterRenderer.render(waters, camera, sun);
+			
 			ParticleMaster.renderParticles(camera);
+
 			multisampleFbo.unbindFrameBuffer();
-			multisampleFbo.resolveToFbo(GL30.GL_COLOR_ATTACHMENT0, outputFbo);
-			multisampleFbo.resolveToFbo(GL30.GL_COLOR_ATTACHMENT1, outputFbo2);
-			PostProcessing.doPostProcessing(outputFbo.getColourTexture(), outputFbo2.getColourTexture());
+			multisampleFbo.resolveToFbo(outputFbo);
+			multisampleFbo.resolveToScreen();
+			//PostProcessing.doPostProcessing(outputFbo.getColourTexture());
 			
 			guiRenderer.render(guiTextures);
 			TextMaster.render();
@@ -269,7 +283,6 @@ public class MainGameLoop {
 		//*********Clean Up Below**************
 		PostProcessing.cleanUp();
 		outputFbo.cleanUp();
-		outputFbo2.cleanUp();
 		multisampleFbo.cleanUp();
 		
 		ParticleMaster.cleanUp();
@@ -282,6 +295,6 @@ public class MainGameLoop {
 		DisplayManager.closeDisplay();
 
 	}
-
+*/
 
 }
