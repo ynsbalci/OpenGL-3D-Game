@@ -3,18 +3,13 @@ package shaders;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.FloatBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
-import org.lwjgl.opengl.GL30;
 import org.lwjgl.util.vector.Matrix4f;
-import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-import org.lwjgl.util.vector.Vector4f;
 
 public abstract class ShaderProgram {
 	
@@ -65,10 +60,6 @@ public abstract class ShaderProgram {
 		GL20.glBindAttribLocation(programID, attribute, variableName);
 	}
 	
-	protected void bindFragOutput(int attachment, String variableName) {
-		GL30.glBindFragDataLocation(programID, attachment, variableName);
-	}
-	
 	protected void loadFloat(int location, float value){
 		GL20.glUniform1f(location, value);
 	}
@@ -79,14 +70,6 @@ public abstract class ShaderProgram {
 	
 	protected void loadVector(int location, Vector3f vector){
 		GL20.glUniform3f(location,vector.x,vector.y,vector.z);
-	}
-	
-	protected void loadVector(int location, Vector4f vector){
-		GL20.glUniform4f(location,vector.x,vector.y,vector.z, vector.w);
-	}
-	
-	protected void load2DVector(int location, Vector2f vector){
-		GL20.glUniform2f(location,vector.x,vector.y);
 	}
 	
 	protected void loadBoolean(int location, boolean value){
@@ -106,10 +89,7 @@ public abstract class ShaderProgram {
 	private static int loadShader(String file, int type){
 		StringBuilder shaderSource = new StringBuilder();
 		try{
-			
-			InputStream in = Class.class.getResourceAsStream(file);
-			
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			BufferedReader reader = new BufferedReader(new FileReader(file));
 			String line;
 			while((line = reader.readLine())!=null){
 				shaderSource.append(line).append("//\n");
